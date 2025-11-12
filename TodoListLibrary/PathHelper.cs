@@ -5,10 +5,29 @@
 
         public static string GetCategoryPath(string categoryName)
         {
-
+            if(IsValidName(categoryName))
+            {
+                var path = Path.Combine(AppPaths.ListPath, categoryName);
+                EnsureDirectory(path);
+                return path;
+            }
+            else return "Invalid directory name.";
         }
 
-
+        public static string GetFilePath(string fileName, string categoryName = "")
+        {
+            if( IsValidName(fileName))
+            {
+                var path = Path.Combine(AppPaths.ListPath, categoryName, $"{fileName}.json");
+                EnsureFile(path);
+                return path;
+            }
+            else return "Invalid file name.";
+        }
+        public static void EnsureFile(string path)
+        {
+            if(!File.Exists(path)) File.Create(path);
+        }
         public static void EnsureDirectory(string path)
         {
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
