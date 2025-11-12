@@ -1,4 +1,4 @@
-﻿namespace TodoListLibrary
+﻿namespace TodoListLibrary.Helpers
 {
     public static class PathHelper
     {

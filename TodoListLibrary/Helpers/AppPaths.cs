@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TodoListLibrary
+namespace TodoListLibrary.Helpers
 {
     public static class AppPaths
     {
