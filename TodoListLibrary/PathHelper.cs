@@ -48,7 +48,7 @@
             if (string.IsNullOrEmpty(name) || name.Length > 255) return false;
             else if (invalidCrossPlatformDirs.Contains(name.ToUpper())) return false;
             else if (name.EndsWith(" ") || name.EndsWith(".")) return false;
-                foreach (var c in invalidCrossPlatformDirs)
+                foreach (var c in invalidCrossPlatformChar)
                 {
                     if (name.Contains(c)) return false;
                 }
