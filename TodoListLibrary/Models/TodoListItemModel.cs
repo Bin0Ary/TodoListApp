@@ -10,6 +10,7 @@ namespace TodoListLibrary.Models
 {
     public class TodoListItemModel
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public DateTimeOffset? DueDate { get; set; } = null;

@@ -5,39 +5,50 @@
 
         public static string GetCategoryPath(string categoryName)
         {
-            if(IsValidName(categoryName))
-            {
-                var path = Path.Combine(AppPaths.ListPath, categoryName);
-                EnsureDirectory(path);
-                return path;
-            }
-            else return "Invalid directory name.";
+            if (!IsValidName(categoryName))
+                throw new ArgumentException("Directory name is invalid", nameof(categoryName));
+
+            var path = Path.Combine(AppPaths.ListPath ?? throw new InvalidOperationException("ListPath was not set"), categoryName);
+            CreateDirectory(path);
+            return path;
+
         }
 
         public static string GetFilePath(string fileName, string categoryName = "")
         {
-            if( IsValidName(fileName))
+            if (!IsValidName(fileName))
+                throw new ArgumentException("File name is invalid", nameof(fileName));
+            if (!fileName.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                fileName += ".json";
+            var path = Path.Combine(GetCategoryPath(categoryName), fileName);
+            CreateFile(path);
+            return path;
+        }
+        public static void CreateFile(string path)
+        {
+            var directory = Path.GetDirectoryName(path);
+            if(!string.IsNullOrEmpty(directory))
+                CreateDirectory(directory);
+            if(!File.Exists(path))
             {
-                var path = Path.Combine(AppPaths.ListPath, categoryName, $"{fileName}.json");
-                EnsureFile(path);
-                return path;
+                try
+                {
+                    using (File.Create(path)) { }
+                }
+                catch (IOException)
+                {
+                    if (!File.Exists(path))
+                        throw;
+                }
             }
-            else return "Invalid file name.";
         }
-        public static void EnsureFile(string path)
+        public static void CreateDirectory(string path)
         {
-            if(!File.Exists(path)) File.Create(path);
-        }
-        public static void EnsureDirectory(string path)
-        {
+            if (string.IsNullOrWhiteSpace(path))
+                return;
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
         }
-        public static readonly string[] invalidCrossPlatformChar =
-        {
-             "<", ">", ":", "\"", "/", "\\", "|", "?", "*",
-            "\0" 
-        };
-        public static readonly string[] invalidCrossPlatformDirs = 
+        public static readonly string[] invalidCrossPlatformDirs =
         {
             "CON", "PRN", "AUX", "NUL",
             "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9",
@@ -45,13 +56,15 @@
         };
         public static bool IsValidName(string name)
         {
-            if (string.IsNullOrEmpty(name) || name.Length > 255) return false;
-            else if (invalidCrossPlatformDirs.Contains(name.ToUpper())) return false;
-            else if (name.EndsWith(" ") || name.EndsWith(".")) return false;
-                foreach (var c in invalidCrossPlatformChar)
-                {
-                    if (name.Contains(c)) return false;
-                }
+            if (string.IsNullOrWhiteSpace(name) || name.Length > 255)
+                return false;
+            if (invalidCrossPlatformDirs.Any(dir => name.Equals(dir, StringComparison.OrdinalIgnoreCase)))
+                return false;
+            if (name.EndsWith(" ") || name.EndsWith("."))
+                return false;
+            var invalidChars = Path.GetInvalidFileNameChars();
+            if (name.IndexOfAny(invalidChars) >= 0)
+                return false;
             return true;
         }
     }

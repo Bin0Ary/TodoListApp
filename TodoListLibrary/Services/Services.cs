@@ -3,40 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TodoListLibrary.DataAccess;
+using TodoListLibrary.Helpers;
 using TodoListLibrary.Models;
 
 namespace TodoListLibrary.Services
 {
     public class Services : IServices
     {
-        void IServices.CreateTodoItem(string path, List<TodoListItemModel> list)
+        private IStorage _storage;
+        public Services(IStorage storage)
         {
-            throw new NotImplementedException();
+            _storage = storage;
+        }
+        void IServices.CreateTodoItem(List<TodoListItemModel> list, TodoListItemModel model ,string fileName, string categoryName = "")
+        {
+            list.Add(model);
+            _storage.Create(PathHelper.GetFilePath(fileName, categoryName), list);
         }
 
-        void IServices.CreateTodoList(string path, List<TodoListItemModel> list)
+        void IServices.CreateTodoList(List<TodoListItemModel> list, string fileName, string categoryName = "")
         {
-            throw new NotImplementedException();
+            _storage.Create(PathHelper.GetFilePath(fileName, categoryName), list);
         }
 
-        void IServices.DeleteTodoItem(string path, List<TodoListItemModel> list)
+        void IServices.DeleteTodoItem(List<TodoListItemModel> list, TodoListItemModel model, string fileName, string categoryName = "")
         {
-            throw new NotImplementedException();
+            list.Remove(model);
+            _storage.Create(PathHelper.GetFilePath(fileName, categoryName), list);
         }
 
-        void IServices.DeleteTodoList(string path)
+        void IServices.DeleteTodoList(string fileName, string categoryName = "")
         {
-            throw new NotImplementedException();
+            _storage.Delete(PathHelper.GetFilePath(fileName,categoryName));
         }
 
-        void IServices.EditTodoItem(string path, List<TodoListItemModel> list, TodoListItemModel model)
+        void IServices.EditTodoItem(TodoListItemModel model, string fileName, string categoryName = "")
         {
-            throw new NotImplementedException();
+            _storage.Edit(PathHelper.GetFilePath(fileName, categoryName), model);
         }
 
-        void IServices.EditTodoList(string path, string newName)
+        void IServices.EditTodoList(string newName, string fileName, string categoryName = "")
         {
-            throw new NotImplementedException();
+            var path = PathHelper.GetFilePath(fileName, categoryName);
+            var list = _storage.Load(path);
+            _storage.Delete(path);
+            _storage.Create(PathHelper.GetFilePath(newName, categoryName), list);
         }
     }
 }

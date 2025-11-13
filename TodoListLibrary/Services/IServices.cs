@@ -9,12 +9,12 @@ namespace TodoListLibrary.Services
 {
     public interface IServices
     {
-        void CreateTodoList(string path, List<TodoListItemModel> list);
-        void CreateTodoItem(string path, List<TodoListItemModel> list);
-        void DeleteTodoList(string path);
-        void DeleteTodoItem(string path, List<TodoListItemModel> list);
-        void EditTodoList(string path, string newName);
-        void EditTodoItem(string path, TodoListItemModel model);
+        void CreateTodoList(List<TodoListItemModel> list, string fileName ,string categoryName = "");
+        void CreateTodoItem(List<TodoListItemModel> list, TodoListItemModel model, string fileName, string categoryName = "");
+        void DeleteTodoList(string fileName, string categoryName="");
+        void DeleteTodoItem(List<TodoListItemModel> list, TodoListItemModel model, string fileName, string categoryName = "");
+        void EditTodoList(string newName ,string fileName, string categoryName = "");
+        void EditTodoItem(TodoListItemModel model, string fileName, string categoryName = "");
 
     }
 }
