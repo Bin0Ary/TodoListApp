@@ -5,7 +5,8 @@
 
         public static string GetCategoryPath(string categoryName)
         {
-            if (!IsValidName(categoryName))
+
+            if (!IsValidName(categoryName) && !(categoryName == ""))
                 throw new ArgumentException("Directory name is invalid", nameof(categoryName));
 
             var path = Path.Combine(AppPaths.ListPath ?? throw new InvalidOperationException("ListPath was not set"), categoryName);

@@ -50,5 +50,9 @@ namespace TodoListLibrary.Services
             _storage.Delete(path);
             _storage.Create(PathHelper.GetFilePath(newName, categoryName), list);
         }
+        List<TodoListItemModel> IServices.GetTodoList(string fileName, string categoryName = "")
+        {
+            return _storage.Load(PathHelper.GetFilePath(fileName, categoryName));
+        }
     }
 }

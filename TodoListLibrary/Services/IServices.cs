@@ -15,6 +15,6 @@ namespace TodoListLibrary.Services
         void DeleteTodoItem(List<TodoListItemModel> list, TodoListItemModel model, string fileName, string categoryName = "");
         void EditTodoList(string newName ,string fileName, string categoryName = "");
         void EditTodoItem(TodoListItemModel model, string fileName, string categoryName = "");
-
+        List<TodoListItemModel> GetTodoList(string fileName, string categoryName);
     }
 }

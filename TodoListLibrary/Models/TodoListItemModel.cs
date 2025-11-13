@@ -15,11 +15,14 @@ namespace TodoListLibrary.Models
         public string Description { get; set; } = string.Empty;
         public DateTimeOffset? DueDate { get; set; } = null;
         public bool IsChecked { get; set; } = false;
+        public bool IsDeleted { get; set; } = false;
+        public TodoListItemModel() { }
         public TodoListItemModel(string title, string description, string dueDate)
         {
             Title = title;
             Description = description;
-            DueDate = DateTime.ParseExact(dueDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            if(!(string.IsNullOrEmpty(dueDate) || string.IsNullOrWhiteSpace(dueDate))) 
+                DueDate = DateTime.ParseExact(dueDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
 
     }
