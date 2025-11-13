@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="LibraryTest/LibraryTest.csproj" Id="7b173ef7-8d11-4300-9477-5836f663cfc2" />
   <Project Path="Testing/Testing.csproj" Id="906805f6-81db-48fc-bab3-136836387e5d" />
   <Project Path="TodoListLibrary/TodoListLibrary.csproj" />
   <Project Path="TodoListProgram/TodoListProgram.csproj" Id="228c2ce5-4431-48c2-b538-af86f775a52f" />

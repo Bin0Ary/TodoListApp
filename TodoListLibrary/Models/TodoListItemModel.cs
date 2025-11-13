@@ -22,7 +22,7 @@ namespace TodoListLibrary.Models
             Title = title;
             Description = description;
             if(!(string.IsNullOrEmpty(dueDate) || string.IsNullOrWhiteSpace(dueDate))) 
-                DueDate = DateTime.ParseExact(dueDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DueDate = DateTime.ParseExact(dueDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
 
     }
