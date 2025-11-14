@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 Testing/
 LibraryTest/
+/TodoListProgram/Assets/Icons
+/TodoListProgram/Assets/Fonts/ProximaNova
