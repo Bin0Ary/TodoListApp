@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
+             xmlns:uc="clr-namespace:TodoListProgram.Controls"
+             xmlns:vm="clr-namespace:TodoListProgram.ViewModels"
+             xmlns:views="clr-namespace:TodoListProgram.Views"
+             x:Class="TodoListProgram.Views.ListView"
+             x:DataType="views:ListView">
+             <Grid 
+             RowDefinitions="auto, *" 
+             ShowGridLines="True" 
+             Background="{DynamicResource PrimaryBackgroundColor}">
+				 <Grid Grid.Row="1"
+                   RowDefinitions="auto, *" 
+                   ShowGridLines="true">
+
+                     <Button Grid.Row="0" HorizontalAlignment="Stretch" Padding="10" Margin="5">
+						 <Grid ColumnDefinitions="*, auto">
+                             <StackPanel 
+                             Grid.Column="0">
+                                 <TextBlock 
+                                 Grid.Column="0" 
+                                 VerticalAlignment="Center" 
+                                 FontFamily="Assets/Fonts/ProximaNova/proximanova_black.ttf"
+                                 FontSize="20"
+                                 Foreground="gray">
+                                 Add new item...
+                                 </TextBlock>
+                                 <TextBlock 
+                                 Grid.Column="0" 
+                                 VerticalAlignment="Center" 
+                                 FontFamily="Assets/Fonts/ProximaNova/proximanova_regular.ttf"
+                                 Foreground="gray">
+                                 Date and time
+                                 </TextBlock>
+                                  <TextBlock 
+                                 Grid.Column="0" 
+                                 VerticalAlignment="Center" 
+                                 FontFamily="Assets/Fonts/ProximaNova/proximanova_regular.ttf"
+                                 Foreground="gray">
+                                 Category
+                                 </TextBlock>
+                             </StackPanel>
+							
+                             <Svg
+                             Grid.Column="1"
+                             Path="/Assets/Icons/thin/square-plus.svg" 
+                             Width="25">
+                             </Svg>
+                             
+                         </Grid>
+                     </Button>
+                    <ListBox Grid.Row="1" ItemsSource="{Binding TodoItems}">
+                        <ListBox.ItemTemplate>
+                             <DataTemplate>
+                                <uc:TodoItemControl TodoItem="{Binding}"/>
+                             </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                 </Grid>
+             </Grid>
+</UserControl>

@@ -3,17 +3,21 @@
         xmlns:vm="using:TodoListProgram.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:uc="clr-namespace:TodoListProgram.Controls"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
         x:Class="TodoListProgram.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        xmlns:views="clr-namespace:TodoListProgram.Views"
         Icon="/Assets/avalonia-logo.ico"
-        Title="TodoListProgram">
-
+        Title="TodoListProgram"
+        Width="400"
+        Height="700">
+        
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-    
+    <views:ListView />
 
 </Window>

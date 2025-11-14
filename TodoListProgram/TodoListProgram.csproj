@@ -10,6 +10,9 @@
 
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="Assets\Fonts\**\*" />
+    <AvaloniaResource Include="Assets\Icons\**\*" />
+	
   </ItemGroup>
 
   <ItemGroup>
@@ -23,9 +26,21 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="11.3.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TodoListLibrary\TodoListLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Fonts\ProximaNova\" />
+    <Folder Include="Assets\Icons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ListView.axaml.cs">
+      <DependentUpon>ListView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
